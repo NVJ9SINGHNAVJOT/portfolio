@@ -1,0 +1,22 @@
+---
+version: "3.8"
+
+volumes:
+  portfolio-frontend:
+
+networks:
+  proxy:
+    external: true
+
+services:
+  portfolio-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-frontend
+    volumes:
+      - portfolio-frontend:/app
+    networks:
+      - proxy
+    ports: [4173:4173] # disable in production
+    env_file: .env
